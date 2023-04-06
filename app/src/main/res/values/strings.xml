@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MyAndroidApplication</string>
+    <string name="spinner">Выпадающий список</string>
+    <string name="menu">Меню</string>
+</resources>
