@@ -18,8 +18,9 @@
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="57dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
+        android:contentDescription="@string/app_name"
         android:onClick="goMenu"
         app:layout_constraintBottom_toBottomOf="@+id/view8"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,13 +54,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view8" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="373dp"
-        android:layout_height="252dp"
-        android:layout_marginTop="32dp"
+
+    <FrameLayout
+        android:layout_width="355dp"
+        android:layout_height="321dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11"
-        app:srcCompat="@drawable/map" />
+        app:layout_constraintTop_toBottomOf="@+id/textView11">
+
+        <com.yandex.mapkit.mapview.MapView
+            android:id="@+id/mapview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></com.yandex.mapkit.mapview.MapView>
+    </FrameLayout>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

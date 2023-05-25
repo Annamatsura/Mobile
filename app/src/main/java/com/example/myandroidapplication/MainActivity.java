@@ -2,7 +2,9 @@ package com.example.myandroidapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.database.Cursor;
@@ -25,11 +27,9 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
-
-
 public class MainActivity extends AppCompatActivity {
 
-//    @Override
+    //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
@@ -66,6 +66,14 @@ public class MainActivity extends AppCompatActivity {
     EditText editAge;
     EditText editHeight;
     EditText editWeight;
+
+    SharedPreferences mSharedPrefN;
+    SharedPreferences mSharedPrefW;
+
+    private static final String MY_NAME = "my_name";
+    private static final String MY_WEIGHT = "my_weight";
+    final String LAST_NAME = "";
+    final String LAST_WEIGHT = "";
 
 
 
@@ -126,10 +134,7 @@ public class MainActivity extends AppCompatActivity {
         editHeight = (EditText) findViewById(R.id.editTextNumber2);
         editWeight = (EditText) findViewById(R.id.editTextNumber3);
 
-        String name1 = editText.getText().toString();
-        String age1 = editAge.getText().toString();
-        String height1 = editHeight.getText().toString();
-        String weight1 = editWeight.getText().toString();
+
 
 
 
@@ -138,9 +143,25 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String query = "INSERT INTO user (name, age, height, weight, activity) " +
-                        "VALUES (name1, age1, height1, weight1, '')";
-                mDb.execSQL(query);
+//                String query = "INSERT INTO user (name, age, height, weight, activity) " +
+//                        "VALUES (name1, age1, height1, weight1, '')";
+//                mDb.execSQL(query);
+                String name1 = editText.getText().toString();
+                String age1 = editAge.getText().toString();
+                String height1 = editHeight.getText().toString();
+                String weight1 = editWeight.getText().toString();
+                mSharedPrefN = getSharedPreferences(MY_NAME, Context.MODE_PRIVATE);
+                mSharedPrefW = getSharedPreferences(MY_WEIGHT, Context.MODE_PRIVATE);
+                SharedPreferences.Editor mEditorN = mSharedPrefN.edit();
+                SharedPreferences.Editor mEditorW = mSharedPrefW.edit();
+                mEditorN.putString("LAST_NAME", name1);
+                mEditorN.commit();
+                mEditorW.putString("LAST_WEIGHT", weight1);
+                mEditorW.commit();
+                Toast.makeText(MainActivity.this, "Вход прошел успешно!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
+//                intent.putExtra("LOGIN_USER", login);
+                startActivity(intent);
             }
         });
 

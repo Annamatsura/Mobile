@@ -2,7 +2,9 @@ package com.example.myandroidapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -49,6 +51,13 @@ public class MainActivity2 extends AppCompatActivity {
 
     EditText editYourCalorieToday;
     Button buttonAddYourCalorieToday;
+    private static final String MY_NAME = "my_name";
+    private static final String MY_WEIGHT = "my_weight";
+    String LAST_NAME = "";
+    String LAST_WEIGHT = "";
+
+    SharedPreferences mSharedPrefN;
+    SharedPreferences mSharedPrefW;
 
     // Переменная для работы с БД
     private DatabaseHelper mDBHelper;
@@ -76,9 +85,15 @@ public class MainActivity2 extends AppCompatActivity {
         }
 
 
+        mSharedPrefN = getSharedPreferences(MY_NAME, Context.MODE_PRIVATE);
+        mSharedPrefW = getSharedPreferences(MY_WEIGHT, Context.MODE_PRIVATE);
+        LAST_NAME = mSharedPrefN.getString("LAST_NAME", "");
+        LAST_WEIGHT = mSharedPrefW.getString("LAST_WEIGHT", "");
         // Найдем компоненты в XML разметке
         textView = (TextView) findViewById(R.id.textView4); // setText() from bd user
-        updateTextHead();
+        textView.setText("Здравствуйте, " + LAST_NAME + "! Ваш текущий вес: " + LAST_WEIGHT +
+                " Рекомендуемая доза калорий на сегодня: 1400");
+//        updateTextHead();
 
         editProduct = (EditText) findViewById(R.id.editTextTextPersonName2);
         String editPr = editProduct.getText().toString();
@@ -86,7 +101,7 @@ public class MainActivity2 extends AppCompatActivity {
         buttonProduct = (Button) findViewById(R.id.button2);
 
         textYourCalories = (TextView) findViewById(R.id.textView7); // setText() from bd calories
-        updateTextProduct();
+//        updateTextProduct();
 
         editYourCalorieToday = (EditText) findViewById(R.id.editTextNumber4);
         String yourCalorieToday = editYourCalorieToday.getText().toString();
